@@ -1,0 +1,109 @@
+<form [formGroup]="f">
+  <div class="ui container">
+    <table class="ui center aligned definition table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Price</mat-label>
+              <span matPrefix>$&nbsp;</span>
+              <input type="number" matInput placeholder="Placeholder" formControlName="price">
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Quantity</mat-label>
+              <input type="number" matInput placeholder="Placeholder" formControlName="quantity">
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Cost</mat-label>
+              <span matPrefix>$&nbsp;</span>
+              <input type="number" matInput placeholder="Placeholder" formControlName="cost">
+              <!-- <mat-hint>Hint</mat-hint> -->
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>Derived</td>
+          <td>${{ costControl.value / quantityControl.value / 100 | number:'0.2-2'}}</td>
+          <td>{{ costControl.value / priceControl.value / 100 | number:'0.0-0'}}</td>
+          <td>${{ priceControl.value * quantityControl.value * 100 | number:'0.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Position</td>
+          <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Position Price</mat-label>
+              <span matPrefix>$&nbsp;</span>
+              <input type="number" matInput placeholder="Placeholder" formControlName="posPrice">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Position Quantity</mat-label>
+              <input type="number" matInput placeholder="Placeholder" formControlName="posQuantity">
+            </mat-form-field>
+          </td>
+          <td>${{ posCost }}</td>
+        </tr>
+        <tr>
+          <td>Combined</td>
+          <td>${{ combinedPrice$ | async | number:'0.2-2'}}</td>
+          <td>{{ combinedQuantity$ | async | number:'0.0-0'}}</td>
+          <td>${{ combinedCost$ | async | number:'0.0-0'}}</td>
+          <!-- <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Position Quantity</mat-label>
+              <input type="number" matInput disabled value="{{ price$ | async | number:'0.0-0'}}">
+            </mat-form-field>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+    <!-- <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Standard form field</mat-label>
+        <input type="number" matInput placeholder="Placeholder" formControlName="price">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p> -->
+    <div class="ui horizontal divider">Pricing Ranges</div>
+    <table class="ui center aligned table">
+      <thead>
+        <tr>
+          <ng-container *ngFor="let i of [-20, -15, -10, -5]">
+            <th>{{ i }}%</th>
+          </ng-container>
+          <th></th>
+          <ng-container *ngFor="let i of [5, 10, 15, 20, 35]">
+            <th>{{ i }}%</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <ng-container *ngFor="let i of [-20, -15, -10, -5]">
+            <td class="negative">${{ calculatePercent(i) | async | number:'0.2-2' }}</td>
+          </ng-container>
+          <td><strong>{{ price$ | async }}</strong> </td>
+          <ng-container *ngFor="let i of [5, 10, 15, 20, 35]">
+            <td class="positive">${{ calculatePercent(i) | async | number:'0.2-2' }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

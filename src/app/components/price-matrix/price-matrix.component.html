@@ -1,0 +1,12 @@
+<form [formGroup]="f">
+    <p>
+        <mat-form-field appearance="standard">
+            <mat-label>Standard form field</mat-label>
+            <input type="number" matInput placeholder="Placeholder" formControlName="price">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+        </mat-form-field>
+    </p>
+</form>
+
+<pre>{{ price$ | async }}</pre>
