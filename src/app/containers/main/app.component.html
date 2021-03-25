@@ -88,7 +88,7 @@
             <th>{{ i }}%</th>
           </ng-container>
           <th></th>
-          <ng-container *ngFor="let i of [5, 10, 15, 20, 35]">
+          <ng-container *ngFor="let i of [5, 10, 15, 20, 30, 35, 40, 50]">
             <th>{{ i }}%</th>
           </ng-container>
         </tr>
@@ -99,7 +99,7 @@
             <td class="negative">${{ calculatePercent(i) | async | number:'0.2-2' }}</td>
           </ng-container>
           <td><strong>{{ price$ | async }}</strong> </td>
-          <ng-container *ngFor="let i of [5, 10, 15, 20, 35]">
+          <ng-container *ngFor="let i of [5, 10, 15, 20, 30, 35, 40, 50]">
             <td class="positive">${{ calculatePercent(i) | async | number:'0.2-2' }}</td>
           </ng-container>
         </tr>
