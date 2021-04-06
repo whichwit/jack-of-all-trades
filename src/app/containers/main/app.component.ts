@@ -122,4 +122,10 @@ export class AppComponent {
       map(v => v * (1 + p / 100))
     )
   }
+
+  public calculateAmount(p: number): Observable<number> {
+    return this.cost$.pipe(
+      map(v => v * (1 + p / 100))
+    )
+  }
 }
